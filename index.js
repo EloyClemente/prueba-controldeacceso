@@ -29,13 +29,32 @@ app.use(express.static(path.resolve(__dirname, 'public')))
 app.use('/', require('./routes/ruta-login'))
 
 
-
-
-io.on('connection', socket =>
+app.post('/app', (req, res)=>
 {
-    console.log('Usuario conectado')
-})
+    if(req.body.username == 'eloy')
+    {
+        req.session.user = req.body.username
+        console.log('Sesión creada:', req.session.user)
 
+
+        io.on('connection', socket =>
+        {
+            console.log('Usuario conectado', socket.id)
+        })
+
+
+        res.sendFile(path.resolve(__dirname, 'public/app.html'))
+    }
+    else
+    {
+        io.on('disconnect', socket =>
+        {
+            console.log('Usuario desconectado')
+        })
+        
+        res.redirect('/')
+    }
+})
 
 require('./config/connection-server')(server)
 
