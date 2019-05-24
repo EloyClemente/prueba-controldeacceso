@@ -6,16 +6,14 @@ const foo = false
 
 router.get('/', (req, res)=>
 {
-    if(foo == false)
+    let ruta = '../public/index.html'
+
+    if(foo)
     {
-        res.sendFile(path.resolve(__dirname, '../public/index.html'))
+        ruta = '../public/app.html'
     }
-    else
-    {
-        res.sendFile(path.resolve(__dirname, '../public/app.html'))
-    }
+ 
+    res.sendFile(path.resolve(__dirname, ruta))
 })
-
-
 
 module.exports = router
