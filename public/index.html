@@ -2,10 +2,6 @@
 <html>
     <head>
         <title></title>
-
-        <script src="/socket.io/socket.io.js"></script>
-        <script>var socket = io()</script>
-        
     </head>
     <body>
 
@@ -13,7 +9,11 @@
 
         <div id="root"></div>
 
-        
+        <form action="/app" method="post">
+            <input type="text" name="username" placeholder="Name">
+            <input type="submit" value="Enviar">
+        </form>
+
         <script src="react-bundle.js"></script>
         <!-- <script src="js/react-bundle.js"></script> -->
     </body>
